@@ -1,0 +1,11 @@
+import { useState } from "react";
+
+function App() {
+  const [selectedID, setSelectedID] = useState(1);
+
+  function clicker(id) {
+    setSelectedID(id);
+  }
+
+  
+}

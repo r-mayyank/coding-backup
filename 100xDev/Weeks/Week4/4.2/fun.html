@@ -1,0 +1,12 @@
+<html>
+    <script>
+        let count = 0;
+        function updateDomValue() {
+            count++;
+            document.getElementById("btn").innerText = `count is ${count}`;
+        }
+    </script>
+    <div>
+        <button id="btn" onclick="updateDomValue()">count is 0</button>
+    </div>
+</html>

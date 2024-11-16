@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .input {
+        padding-top: 20px;
+        text-align: center;
+        background-color: blanchedalmond;
+
+    }
+    .ans {
+        padding-top: 20px;
+        text-align: center;
+        background-color: blanchedalmond;
+        padding-bottom: 20px;
+    }
+</style>
+<script>
+    async function populateDiv() {
+        const principle = document.getElementById("principle").value;
+        const rate = document.getElementById("rate").value;
+        const time = document.getElementById("time").value;
+
+        
+
+        const response = await fetch("https://sum-server.100xdevs.com/interest?principle=" + principle + "&rate=" + rate + "&time=" + time);
+        const ans = await response.text();
+        document.getElementById("finalSum").innerHTML = ans;
+    }
+</script>
+<body>
+    <div class="input">
+        <input class="inputs" id="principle" type="text" placeholder="Principle"> <br></br>
+    </div>
+
+    <div class="input">
+        <input class="inputs" id="rate" type="text" placeholder="Rate"> <br></br>
+    </div>
+
+    <div class="input">
+        <input class="inputs" id="time" type="text" placeholder="Time"> <br></br>
+    </div>
+
+    <div class="ans">
+        <button onclick="populateDiv()">Calculate interest </button>
+    </div>
+    
+    <div id="finalSum"></div>
+</body>
+</html>

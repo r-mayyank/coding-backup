@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="title" type="text" placeholder="Todo title"></input> 
+        <br></br>
+        <input id="desc" type="text" placeholder="Todo description"></input>
+        <br></br>
+        <!-- <button onclick="addTodo()">Add todo</button> -->
+        <br></br>
+    </div>
+    <div id="container"></div>
+    <script>
+        let globalId = 0;
+
+        // function markAsDone(id) {
+        //     const parent = document.getElementById(id);
+        //     parent.children[2].innerHTML = "Done";
+        // }
+
+        function createChild(title, desc, id, completed) {
+            const child = document.createElement("div");
+            const firstGrandChild = document.createElement("div");
+            firstGrandChild.innerHTML = `<h3>${title}</h3>`;
+            const secondGrandChild = document.createElement("div");
+            secondGrandChild.innerHTML = `<p>${desc}</p>`;
+            const thirdGrandChild = document.createElement("button");
+            thirdGrandChild.innerHTML = "Mark as done";
+            // thirdGrandChild.setAttribute("onclick", `markAsDone(${id})`);
+            child.appendChild(firstGrandChild);
+            child.appendChild(secondGrandChild);
+            child.appendChild(thirdGrandChild);
+            child.setAttribute("id", id);
+            return child;
+        }
+
+        function addTodo() {
+            const title = document.getElementById("title").value;
+            const desc = document.getElementById("desc").value;
+            const parent = document.getElementById("container");
+
+            parent.appendChild(createChild(title, desc, globalId++));
+            //method 1
+            // document.getElementById("container").innerHTML += `
+            //     <div>
+            //         <h3>${title}</h3>
+            //         <p>${desc}</p>
+            //         <button>Mark as done</button>
+            //     </div>
+            // `;x
+        }
+
+        function updateDomAccToState(state) {
+            const parent = document.getElementById("container")
+            parent.innerHTML = "";
+            for (let i = 0; i < state.length; i++) {
+                const child = createChild(state [i].title, state[i].description, state[i].id/ state[i].completed);
+                parent.appendChild(child);
+            }
+        }
+        window.setInterval(async function() {
+            const res = await fetch("https://sum-server.100xdevs.com/todos")
+            const json = await res.json();
+            console.log(json);
+            updateDomAccToState(json.todos);
+        }, 5000);
+//             const json = {
+//     "todos": [
+//         {
+//             "id": 1,
+//             "title": "Todo 1",
+//             "description": "This is todo 1",
+//             "completed": false
+//         },
+//         {
+//             "id": 2,
+//             "title": "Todo 2",
+//             "description": "This is todo 2",
+//             "completed": false
+//         },
+//         {
+//             "id": 3,
+//             "title": "Todo 3",
+//             "description": "This is todo 3",
+//             "completed": false
+//         },
+//         {
+//             "id": 5,
+//             "title": "Todo 5",
+//             "description": "This is todo 5",
+//             "completed": false
+//         }
+//     ]
+// }
+//         updateDomAccToState(json.todos);
+    </script>
+</body>
+</html>

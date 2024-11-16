@@ -1,0 +1,6 @@
+username: admin
+pass: 244466666
+
+mongodb+srv://admin:244466666@cluster0.zxtr0ph.mongodb.net/
+
+postgres: postgresql://neondbTest_owner:ZDtegO0X6Qif@ep-soft-base-a5obciqa.us-east-2.aws.neon.tech/neondbTest?sslmode=require
